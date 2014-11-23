@@ -12,28 +12,45 @@ __status__ = "Prototype"
 
 # imports one per line
 import json
-import re
 import datetime
 
 stock_data = []
 monthly_averages = []
 
 def stock_reader(input_file):
+    global monthly_averages
+
     stock_file = read_json_from_file(input_file)
 
     daily_total_sales = calculate_daily_total_sales(stock_file)
     calculate_monthly_average(daily_total_sales)
 
-def calculate_monthly_average(total_sales):
+    for item in monthly_averages:
+        print(item)
+
+
+def calculate_monthly_average(total_daily_sales_per_month):
     global monthly_averages
+
+    for month in total_daily_sales_per_month:
+
+        total_sales = 0
+        total_volume = 0
+        for total_daily_sale in total_daily_sales_per_month[month]:
+            total_volume = total_daily_sale[0] + total_volume
+            total_sales = (total_daily_sale[0] * total_daily_sale[1]) + total_sales
+
+        average = round(total_sales / total_volume, 2)
+
+        monthly_average = (month, average)
+
+        monthly_averages.append(monthly_average)
 
 
 def calculate_daily_total_sales(stock_file):
-    total_sales = []
     monthly_sales = {}
 
     for entry in stock_file:
-        day_dict={}
 
         date = entry.get("Date")
         year = date[0:4]
@@ -43,11 +60,9 @@ def calculate_daily_total_sales(stock_file):
         if(yearmonth) not in monthly_sales:
             monthly_sales[yearmonth] = []
 
-        monthly_sales[yearmonth].append(entry.get("Volume") * entry.get("Close"))
-        total_sales.append(day_dict)
+        yearmonth_tuple = (entry.get("Volume"), entry.get("Close"))
+        monthly_sales[yearmonth].append(yearmonth_tuple)
 
-    for item in monthly_sales:
-        print(monthly_sales.get(item))
     return monthly_sales
 
 
