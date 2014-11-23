@@ -17,6 +17,13 @@ import datetime
 stock_data = []
 monthly_averages = []
 
+def read_stock_data(stock_name, stock_file_name):
+    stock_file = read_json_from_file(stock_file_name)
+
+    daily_total_sales = calculate_daily_total_sales(stock_file)
+    calculate_monthly_average(daily_total_sales)
+
+    sort_monthly_averages()
 
 def calculate_monthly_average(total_daily_sales_per_month):
     global monthly_averages
@@ -58,19 +65,6 @@ def sort_monthly_averages():
     temp_averages = sorted(monthly_averages, key=lambda average: average[1])
     monthly_averages = temp_averages
 
-def read_stock_data(stock_name, stock_file_name):
-    stock_file = read_json_from_file(stock_file_name)
-
-    daily_total_sales = calculate_daily_total_sales(stock_file)
-    calculate_monthly_average(daily_total_sales)
-
-    sort_monthly_averages()
-    x = len(monthly_averages)
-    for item in range(0,x):
-        print(monthly_averages[item])
-
-    return
-
 def six_best_months():
     return [monthly_averages[-1], monthly_averages[-2], monthly_averages[-3], monthly_averages[-4],
             monthly_averages[-5], monthly_averages[-6]]
@@ -84,5 +78,4 @@ def read_json_from_file(file_name):
         file_contents = file_handle.read()
 
     return json.loads(file_contents)
-
 
