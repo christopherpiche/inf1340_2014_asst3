@@ -25,10 +25,10 @@ def stock_reader(input_file):
     daily_total_sales = calculate_daily_total_sales(stock_file)
     calculate_monthly_average(daily_total_sales)
 
-    for item in monthly_averages:
-        print(item)
-
-
+    sort_monthly_averages()
+    x = len(monthly_averages)
+    for item in range(0,x):
+        print(monthly_averages[item])
 def calculate_monthly_average(total_daily_sales_per_month):
     global monthly_averages
 
@@ -65,10 +65,14 @@ def calculate_daily_total_sales(stock_file):
 
     return monthly_sales
 
+def sort_monthly_averages():
+    global monthly_averages
+    temp_averages = sorted(monthly_averages, key=lambda average: average[1])
+    monthly_averages = temp_averages
+
 
 def read_stock_data(stock_name, stock_file_name):
     return
-
 
 def six_best_months():
     return [('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0)]
