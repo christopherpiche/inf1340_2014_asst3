@@ -17,18 +17,7 @@ import datetime
 stock_data = []
 monthly_averages = []
 
-def stock_reader(input_file):
-    global monthly_averages
 
-    stock_file = read_json_from_file(input_file)
-
-    daily_total_sales = calculate_daily_total_sales(stock_file)
-    calculate_monthly_average(daily_total_sales)
-
-    sort_monthly_averages()
-    x = len(monthly_averages)
-    for item in range(0,x):
-        print(monthly_averages[item])
 def calculate_monthly_average(total_daily_sales_per_month):
     global monthly_averages
 
@@ -45,7 +34,6 @@ def calculate_monthly_average(total_daily_sales_per_month):
         monthly_average = (month, average)
 
         monthly_averages.append(monthly_average)
-
 
 def calculate_daily_total_sales(stock_file):
     monthly_sales = {}
@@ -70,17 +58,26 @@ def sort_monthly_averages():
     temp_averages = sorted(monthly_averages, key=lambda average: average[1])
     monthly_averages = temp_averages
 
-
 def read_stock_data(stock_name, stock_file_name):
+    stock_file = read_json_from_file(stock_file_name)
+
+    daily_total_sales = calculate_daily_total_sales(stock_file)
+    calculate_monthly_average(daily_total_sales)
+
+    sort_monthly_averages()
+    x = len(monthly_averages)
+    for item in range(0,x):
+        print(monthly_averages[item])
+
     return
 
 def six_best_months():
-    return [('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0)]
-
+    return [monthly_averages[-1], monthly_averages[-2], monthly_averages[-3], monthly_averages[-4],
+            monthly_averages[-5], monthly_averages[-6]]
 
 def six_worst_months():
-    return [('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0)]
-
+    return [monthly_averages[0], monthly_averages[1], monthly_averages[2], monthly_averages[3], monthly_averages[4],
+            monthly_averages[5]]
 
 def read_json_from_file(file_name):
     with open(file_name) as file_handle:
@@ -88,4 +85,4 @@ def read_json_from_file(file_name):
 
     return json.loads(file_contents)
 
-stock_reader("data/GOOG.json")
+
