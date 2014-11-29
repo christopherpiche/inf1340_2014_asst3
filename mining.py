@@ -2,16 +2,15 @@
 
 """ Docstring """
 
-__author__ = 'Lauren Olar, Christopher Piche, Magdalene Schifferer'
-__email__ = "lauren.olar@mail.utoronto.ca, christopher.piche@mail.utoronto.ca, magdalene.schifferer@mail.utoronto.ca"
+__author__ = 'Susan Sim'
+__email__ = "ses@drsusansim.org"
 
-__copyright__ = "2014 Lauren Olar, Christopher Piche, Magdalene Schifferer"
+__copyright__ = "2014 Susan Sim"
 __license__ = "MIT License"
 
 __status__ = "Prototype"
 
 # imports one per line
-
 import json
 
 stock_data = []
@@ -22,11 +21,6 @@ def read_stock_data(stock_name, stock_file_name):
 
     monthly_total_sales = calculate_monthly_total_sales(stock_file)
     calculate_monthly_average(monthly_total_sales)
-
-    if len(monthly_averages) < 6:
-        raise ValueError("There are an insufficient number of months to calculate the best or worst 6 - "
-                         "your stock is too young")
-
 
     sort_monthly_averages()
 
@@ -53,16 +47,20 @@ def calculate_monthly_total_sales(stock_file):
 
     for entry in stock_file:
 
-        date = entry.get("Date")
-        year = date[0:4]
-        month = date[5:7]
-        yearmonth = year + "/" + month
+        if "Date" in entry.keys() and entry.get("Date") is not None:
+            if "Volume" in entry.keys() and entry.get("Volume") is not None and "Close" in entry.keys() \
+                and entry.get("Close") is not None:
 
-        if yearmonth not in monthly_sales:
-            monthly_sales[yearmonth] = []
+                date = entry.get("Date")
+                year = date[0:4]
+                month = date[5:7]
+                yearmonth = year + "/" + month
 
-        yearmonth_tuple = (entry.get("Volume"), entry.get("Close"))
-        monthly_sales[yearmonth].append(yearmonth_tuple)
+                if(yearmonth) not in monthly_sales:
+                    monthly_sales[yearmonth] = []
+
+                yearmonth_tuple = (entry.get("Volume"), entry.get("Close"))
+                monthly_sales[yearmonth].append(yearmonth_tuple)
 
     return monthly_sales
 
