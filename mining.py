@@ -20,21 +20,22 @@ monthly_averages = []
 def read_stock_data(stock_name, stock_file_name):
     stock_file = read_json_from_file(stock_file_name)
 
-    daily_total_sales = calculate_daily_total_sales(stock_file)
-    calculate_monthly_average(daily_total_sales)
+    monthly_total_sales = calculate_monthly_total_sales(stock_file)
+    calculate_monthly_average(monthly_total_sales)
 
     sort_monthly_averages()
 
-def calculate_monthly_average(total_daily_sales_per_month):
+
+def calculate_monthly_average(monthly_total_sales):
     global monthly_averages
 
-    for month in total_daily_sales_per_month:
+    for month in monthly_total_sales:
 
         total_sales = 0
         total_volume = 0
-        for total_daily_sale in total_daily_sales_per_month[month]:
-            total_volume = total_daily_sale[0] + total_volume
-            total_sales = (total_daily_sale[0] * total_daily_sale[1]) + total_sales
+        for days in monthly_total_sales[month]:
+            total_volume = days[0] + total_volume
+            total_sales = (days[0] * days[1]) + total_sales
 
         average = round(total_sales / total_volume, 2)
 
@@ -42,7 +43,7 @@ def calculate_monthly_average(total_daily_sales_per_month):
 
         monthly_averages.append(monthly_average)
 
-def calculate_daily_total_sales(stock_file):
+def calculate_monthly_total_sales(stock_file):
     monthly_sales = {}
 
     for entry in stock_file:
@@ -78,4 +79,5 @@ def read_json_from_file(file_name):
         file_contents = file_handle.read()
 
     return json.loads(file_contents)
+
 
