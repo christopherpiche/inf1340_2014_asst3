@@ -2,17 +2,17 @@
 
 """ Docstring """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
+__author__ = 'Lauren Olar, Christopher Piche, Magdalene Schifferer'
+__email__ = "lauren.olar@mail.utoronto.ca, christopher.piche@mail.utoronto.ca, magdalene.schifferer@mail.utoronto.ca"
 
-__copyright__ = "2014 Susan Sim"
+__copyright__ = "2014 Lauren Olar, Christopher Piche, Magdalene Schifferer
 __license__ = "MIT License"
 
 __status__ = "Prototype"
 
 # imports one per line
+
 import json
-import datetime
 
 stock_data = []
 monthly_averages = []
@@ -52,7 +52,7 @@ def calculate_daily_total_sales(stock_file):
         month = date[5:7]
         yearmonth = year + "/" + month
 
-        if(yearmonth) not in monthly_sales:
+        if yearmonth not in monthly_sales:
             monthly_sales[yearmonth] = []
 
         yearmonth_tuple = (entry.get("Volume"), entry.get("Close"))
