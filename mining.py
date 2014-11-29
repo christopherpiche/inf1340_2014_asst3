@@ -5,7 +5,7 @@
 __author__ = 'Lauren Olar, Christopher Piche, Magdalene Schifferer'
 __email__ = "lauren.olar@mail.utoronto.ca, christopher.piche@mail.utoronto.ca, magdalene.schifferer@mail.utoronto.ca"
 
-__copyright__ = "2014 Lauren Olar, Christopher Piche, Magdalene Schifferer
+__copyright__ = "2014 Lauren Olar, Christopher Piche, Magdalene Schifferer"
 __license__ = "MIT License"
 
 __status__ = "Prototype"
@@ -22,6 +22,11 @@ def read_stock_data(stock_name, stock_file_name):
 
     monthly_total_sales = calculate_monthly_total_sales(stock_file)
     calculate_monthly_average(monthly_total_sales)
+
+    if len(monthly_averages) < 6:
+        raise ValueError("There are an insufficient number of months to calculate the best or worst 6 - "
+                         "your stock is too young")
+
 
     sort_monthly_averages()
 
