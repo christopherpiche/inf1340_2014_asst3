@@ -47,9 +47,9 @@ def calculate_monthly_total_sales(stock_file):
 
     for entry in stock_file:
 
-        if "Date" in entry.keys() and entry.get("Date") is not None:
-            if "Volume" in entry.keys() and entry.get("Volume") is not None and "Close" in entry.keys() \
-                and entry.get("Close") is not None:
+        if "Date" in entry.keys() and entry.get("Date") != "":
+            if "Volume" in entry.keys() and entry.get("Volume") != "" and "Close" in entry.keys() \
+                and entry.get("Close") != "":
 
                 date = entry.get("Date")
                 year = date[0:4]
