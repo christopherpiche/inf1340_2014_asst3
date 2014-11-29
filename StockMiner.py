@@ -12,7 +12,7 @@ __status__ = "Prototype"
 
 # imports one per line
 import json
-
+import statistics
 
 class StockMiner:
 
@@ -34,8 +34,8 @@ class StockMiner:
 
         for entry in self.stock_file:
 
-          if "Date" in entry.keys() and entry.get("Date") != "" and type(entry.get("Date")) is str:
-                 if "Volume" in entry.keys() and entry.get("Volume") is not str and "Close" in entry.keys() \
+            if "Date" in entry.keys() and entry.get("Date") != "" and type(entry.get("Date")) is str:
+                if "Volume" in entry.keys() and entry.get("Volume") is not str and "Close" in entry.keys() \
                          and entry.get("Close") != "" and entry.get("Close") is not str:
 
                     date = entry.get("Date")
@@ -43,7 +43,7 @@ class StockMiner:
                     month = date[5:7]
                     yearmonth = year + "/" + month
 
-                    if(yearmonth) not in monthly_sales:
+                    if yearmonth not in monthly_sales:
                         monthly_sales[yearmonth] = []
 
                     yearmonth_tuple = (entry.get("Volume"), entry.get("Close"))
@@ -53,6 +53,7 @@ class StockMiner:
 
             total_sales = 0
             total_volume = 0
+
             for days in monthly_sales[month]:
                 total_volume = days[0] + total_volume
                 total_sales = (days[0] * days[1]) + total_sales
@@ -80,7 +81,13 @@ class StockMiner:
         return [self.monthly_averages[0], self.monthly_averages[1], self.monthly_averages[2],
                 self.monthly_averages[3], self.monthly_averages[4],self.monthly_averages[5]]
 
+    def get_standard_deviation(self):
+        data = []
+        for average in range(0, len(self.monthly_averages)):
+            data.append(self.monthly_averages[average][1])
+
+        print(statistics.stdev(data))
 
 
-
-
+test = StockMiner("Goog", "data/GOOG.json")
+test.get_standard_deviation()
