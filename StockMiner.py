@@ -27,7 +27,8 @@ class StockMiner:
 
         self.calculate_monthly_average()
         self.sort_monthly_averages()
-
+        self.standard_deviation = []
+        self.calculate_standard_deviation()
 
     def calculate_monthly_average(self):
         monthly_sales = {}
@@ -81,13 +82,21 @@ class StockMiner:
         return [self.monthly_averages[0], self.monthly_averages[1], self.monthly_averages[2],
                 self.monthly_averages[3], self.monthly_averages[4],self.monthly_averages[5]]
 
-    def get_standard_deviation(self):
+    def calculate_standard_deviation(self):
         data = []
         for average in range(0, len(self.monthly_averages)):
             data.append(self.monthly_averages[average][1])
 
-        #print(statistics.stdev(data))
-        return(round(statistics.stdev(data), 2))
+        self.standard_deviation = round(statistics.pstdev(data), 2)
 
-#test = StockMiner("Goog", "data/GOOG.json")
-#test.get_standard_deviation()
+    def get_standard_deviation(self):
+        return self.standard_deviation
+
+    def compare_standard_deviation(self, other):
+        if self.standard_deviation > other.standard_deviation:
+            return (self.stock + "(%.2f) has a higher standard deviation than " + other.stock + "(%.2f)" %(self.standard_deviation, other.standard_deviation))
+        elif self.standard_deviation == other.standard_deviation:
+            return self.stock + " and" + other.stock + " have equal standard deviations."
+        else:
+            return other.stock + " has a higher standard deviation than " + self.stock
+

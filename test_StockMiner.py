@@ -44,3 +44,18 @@ def test_completeness():
                                 ('2008/04', 574.29), ('2008/01', 564.3)]
     assert Complete.six_worst_months() == [('2008/03', 440.47), ('2008/09', 449.15), ('2008/08', 473.78), ('2008/02', 475.39), ('2008/07', 483.11),
                                  ('2008/06', 528.07)]
+
+
+def test_standard_deviation():
+
+    standard_deviation = StockMiner("standard deviation", "standarddeviation.json")
+
+    assert standard_deviation.get_standard_deviation() == 45.46
+
+
+def test_standard_deviation_comparison():
+    GOOG = StockMiner("GOOG", "data/GOOG.json")
+    TSE_SO = StockMiner("TSE-SO", "data/TSE-SO.json")
+
+    assert GOOG.compare_standard_deviation(TSE_SO) == "GOOG has a higher standard deviation than TSE-SO"
+
