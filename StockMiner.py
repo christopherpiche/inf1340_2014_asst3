@@ -86,8 +86,8 @@ class StockMiner:
         for average in range(0, len(self.monthly_averages)):
             data.append(self.monthly_averages[average][1])
 
-        print(statistics.stdev(data))
+        #print(statistics.stdev(data))
+        return(round(statistics.stdev(data), 2))
 
-
-test = StockMiner("Goog", "data/GOOG.json")
-test.get_standard_deviation()
+#test = StockMiner("Goog", "data/GOOG.json")
+#test.get_standard_deviation()
