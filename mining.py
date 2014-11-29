@@ -47,9 +47,9 @@ def calculate_monthly_total_sales(stock_file):
 
     for entry in stock_file:
 
-        if "Date" in entry.keys() and entry.get("Date") != "":
-            if "Volume" in entry.keys() and entry.get("Volume") != "" and "Close" in entry.keys() \
-                and entry.get("Close") != "":
+        if "Date" in entry.keys() and type(entry.get("Date")) is str:
+            if "Volume" in entry.keys() and type(entry.get("Volume")) is int and "Close" in entry.keys() \
+                    and type(entry.get("Close")) is float:
 
                 date = entry.get("Date")
                 year = date[0:4]
