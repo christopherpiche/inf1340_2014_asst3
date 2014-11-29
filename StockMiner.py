@@ -34,9 +34,9 @@ class StockMiner:
 
         for entry in self.stock_file:
 
-            if "Date" in entry.keys() and type(entry.get("Date")) is str:
-                if "Volume" in entry.keys() and type(entry.get("Volume")) is int or float and "Close" in entry.keys() \
-                        and type(entry.get("Close")) is float or int:
+          if "Date" in entry.keys() and entry.get("Date") != "" and type(entry.get("Date")) is str:
+                 if "Volume" in entry.keys() and entry.get("Volume") is not str and "Close" in entry.keys() \
+                         and entry.get("Close") != "" and entry.get("Close") is not str:
 
                     date = entry.get("Date")
                     year = date[0:4]
@@ -63,6 +63,8 @@ class StockMiner:
 
             self.monthly_averages.append(monthly_average)
 
+        if len(self.monthly_averages) < 6:
+            raise ValueError("Your stock, unfortunately, is too young - you do not have adequate data yet.")
 
     def sort_monthly_averages(self):
 
