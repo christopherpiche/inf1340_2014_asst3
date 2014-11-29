@@ -7,7 +7,7 @@ __email__ = "lauren.olar@mail.utoronto.ca, christopher.piche@mail.utoronto.ca, m
 
 __copyright__ = "2014 Lauren Olar, Christopher Piche, Magdalene Schifferer"
 __license__ = "MIT License"
-
+##
 __status__ = "Prototype"
 
 # imports one per line
