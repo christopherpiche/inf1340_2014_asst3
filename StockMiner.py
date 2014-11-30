@@ -81,7 +81,7 @@ class StockMiner:
     def six_worst_months(self):
         return [self.monthly_averages[0], self.monthly_averages[1], self.monthly_averages[2],
                 self.monthly_averages[3], self.monthly_averages[4],self.monthly_averages[5]]
-
+##
     def calculate_standard_deviation(self):
         data = []
         for average in range(0, len(self.monthly_averages)):
