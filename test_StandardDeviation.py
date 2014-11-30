@@ -15,7 +15,11 @@ __status__ = "Prototype"
 from StockMiner import *
 
 
+def test_standard_deviation():
 
+    standard_deviation = StockMiner("standard deviation", "standarddeviation.json")
+
+    assert standard_deviation.get_standard_deviation() == 49.79
 
 
 
