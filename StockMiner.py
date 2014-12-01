@@ -18,10 +18,10 @@ import statistics
 
 class StockMiner:
     """
-    Information about a stock, including its name, the file name, its monthly averages and it's standard deviation.
+    Information about a stock, including its name, the file name, its monthly averages and its standard deviation.
     """
 
-    def __init__(self,stock_name,stock_file_name):
+    def __init__(self, stock_name, stock_file_name):
         """
         (StockMiner, str, str) -> NoneType
         Create a new StockMiner with a name of stock_name, and the information file being stock_file_name, which is
@@ -30,6 +30,7 @@ class StockMiner:
         :param stock_name: str: name of stock
         :param stock_file_name: str: file name
         """
+
         self.stock = stock_name
 
         with open(stock_file_name) as file_handle:
@@ -70,7 +71,7 @@ class StockMiner:
                     year_month_tuple = (entry.get("Volume"), entry.get("Close"))
                     monthly_sales[year_month].append(year_month_tuple)
 
-        # For each year/month key use the values to calculate the monthly average then add it to monthly_averages
+        # For each year/month key, uses the values to calculate the monthly average then add it to monthly_averages
         for month in monthly_sales:
 
             total_sales = 0
@@ -99,7 +100,7 @@ class StockMiner:
 
     def six_best_months(self):
         """
-        Returns the six best months.
+        Gathers the six best months.
         :return: list: List of tuples. The tuple contains the year/month and the monthly average.
         """
 
@@ -108,17 +109,18 @@ class StockMiner:
 
     def six_worst_months(self):
         """
-        Returns the six worst months
+        Gathers the six worst months.
         :return: list: List of tuples. The tuple contains the year/month and the monthly average.
         """
 
         return [self.monthly_averages[0], self.monthly_averages[1], self.monthly_averages[2],
                 self.monthly_averages[3], self.monthly_averages[4],self.monthly_averages[5]]
-##
+
     def calculate_standard_deviation(self):
         """
         Calculates the standard_deviation of monthly averages for the stock.
         """
+
         data = []
         for average in range(0, len(self.monthly_averages)):
             data.append(self.monthly_averages[average][1])
@@ -128,19 +130,19 @@ class StockMiner:
     def get_standard_deviation(self):
         """
         Returns the standard_deviation of the stock
-
         :return: float: standard_deviation
         """
+
         return self.standard_deviation
 
     def compare_standard_deviation(self, other):
         """
-        Compares the two stocks base on their standard deviations, and a returns a string with the results,
+        Compares the two stocks based on their standard deviations and a returns a string with the results,
         including the value of their standard deviations.
-
         :param other: another instance of StockMiner
-        :return:string: result of comparison
+        :return: string: result of comparison
         """
+
         if self.standard_deviation > other.standard_deviation:
             return self.stock + " has a higher standard deviation than " + other.stock + ": " + \
                    str(self.standard_deviation) + " versus " + str(other.standard_deviation) + "."
