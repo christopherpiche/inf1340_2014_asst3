@@ -14,7 +14,7 @@ Example:
 """
 
 __author__ = 'Lauren Olar, Christopher Piche, and Magdalene Schifferer'
-__email__ = "lauren.olar@mail.utoronto.ca, christopher.piche@mail.utoronto.ca, magdalene.schifferer@mail.utoronto.ca"
+__email__ = " lauren.olar@mail.utoronto.ca, christopher.piche@mail.utoronto.ca, magdalene.schifferer@mail.utoronto.ca"
 
 __copyright__ = "2014 Lauren Olar, Christopher Piche, Magadelene Schifferer"
 __license__ = "MIT License"
