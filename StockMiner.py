@@ -18,7 +18,7 @@ import statistics
 
 class StockMiner:
 
-    def __init__(self,stock_name,stock_file_name):
+    def __init__(self, stock_name, stock_file_name):
 
         self.stock = stock_name
 
