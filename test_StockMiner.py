@@ -26,6 +26,7 @@ def test_goog():
     assert GOOG.get_standard_deviation() == 143.62
 
 
+
 def test_tse_so():
     TSE_SO = StockMiner("TSE-SO", "data/TSE-SO.json")
 
@@ -34,6 +35,7 @@ def test_tse_so():
     assert TSE_SO.six_worst_months() == [('2009/03', 1.74), ('2008/11', 2.08), ('2008/12', 2.25), ('2009/02', 2.41),
                                   ('2009/04', 2.75), ('2009/01', 3.14)]
     assert TSE_SO.get_standard_deviation() == 4.12
+
 
 
 def test_inadequate_months():
