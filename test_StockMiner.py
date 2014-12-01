@@ -57,5 +57,6 @@ def test_standard_deviation_comparison():
     GOOG = StockMiner("GOOG", "data/GOOG.json")
     TSE_SO = StockMiner("TSE-SO", "data/TSE-SO.json")
 
-    assert GOOG.compare_standard_deviation(TSE_SO) == "GOOG has a higher standard deviation than TSE-SO"
-
+    assert GOOG.compare_standard_deviation(TSE_SO) == "GOOG has a higher standard deviation than TSE-SO: 143.62 versus 4.12."
+    assert GOOG.compare_standard_deviation(GOOG) == "GOOG and GOOG have equal standard deviations."
+    assert TSE_SO.compare_standard_deviation(GOOG) == "TSE-SO has a lower standard deviation than GOOG: 4.12 versus 143.62."

@@ -2,17 +2,19 @@
 
 """ Docstring """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
+__author__ = 'Lauren Olar, Christopher Piche, and Magdalene Schifferer'
+__email__ = "lauren.olar@mail.utoronto.ca, christopher.piche@mail.utoronto.ca, magdalene.schiffer@mail.utoronto.ca"
 
-__copyright__ = "2014 Susan Sim"
+__copyright__ = "2014 Lauren Olar, Christopher Piche, Magadelene Schifferer"
 __license__ = "MIT License"
 
 __status__ = "Prototype"
 
 # imports one per line
+
 import json
 import statistics
+
 
 class StockMiner:
 
@@ -23,10 +25,11 @@ class StockMiner:
         with open(stock_file_name) as file_handle:
             file_contents = file_handle.read()
         self.stock_file = json.loads(file_contents)
-        self.monthly_averages = []
 
+        self.monthly_averages = []
         self.calculate_monthly_average()
         self.sort_monthly_averages()
+
         self.standard_deviation = []
         self.calculate_standard_deviation()
 
@@ -36,19 +39,19 @@ class StockMiner:
         for entry in self.stock_file:
 
             if "Date" in entry.keys() and entry.get("Date") != "" and type(entry.get("Date")) is str:
-                if "Volume" in entry.keys() and entry.get("Volume") is not str and "Close" in entry.keys() \
-                         and entry.get("Close") != "" and entry.get("Close") is not str:
+                if "Volume" in entry.keys() and entry.get("Volume") != "" and entry.get("Volume") is not str and\
+                        "Close" in entry.keys() and entry.get("Close") != "" and entry.get("Close") is not str:
 
                     date = entry.get("Date")
                     year = date[0:4]
                     month = date[5:7]
-                    yearmonth = year + "/" + month
+                    year_month = year + "/" + month
 
-                    if yearmonth not in monthly_sales:
-                        monthly_sales[yearmonth] = []
+                    if year_month not in monthly_sales:
+                        monthly_sales[year_month] = []
 
-                    yearmonth_tuple = (entry.get("Volume"), entry.get("Close"))
-                    monthly_sales[yearmonth].append(yearmonth_tuple)
+                    year_month_tuple = (entry.get("Volume"), entry.get("Close"))
+                    monthly_sales[year_month].append(year_month_tuple)
 
         for month in monthly_sales:
 
@@ -81,7 +84,7 @@ class StockMiner:
     def six_worst_months(self):
         return [self.monthly_averages[0], self.monthly_averages[1], self.monthly_averages[2],
                 self.monthly_averages[3], self.monthly_averages[4],self.monthly_averages[5]]
-##
+
     def calculate_standard_deviation(self):
         data = []
         for average in range(0, len(self.monthly_averages)):
@@ -94,9 +97,11 @@ class StockMiner:
 
     def compare_standard_deviation(self, other):
         if self.standard_deviation > other.standard_deviation:
-            return (self.stock + "(%.2f) has a higher standard deviation than " + other.stock + "(%.2f)" %(self.standard_deviation, other.standard_deviation))
+            return self.stock + " has a higher standard deviation than " + other.stock + ": " + \
+                   str(self.standard_deviation) + " versus " + str(other.standard_deviation) + "."
         elif self.standard_deviation == other.standard_deviation:
-            return self.stock + " and" + other.stock + " have equal standard deviations."
+            return self.stock + " and " + other.stock + " have equal standard deviations."
         else:
-            return other.stock + " has a higher standard deviation than " + self.stock
+            return self.stock + " has a lower standard deviation than " + other.stock + ": " + \
+                   str(self.standard_deviation) + " versus " + str(other.standard_deviation) + "."
 
