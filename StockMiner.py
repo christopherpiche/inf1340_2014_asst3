@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 
-""" Docstring """
+""" Assignment 3, Data Mining, INF1340, Fall 2014. Average stock price and standard deviation.
+
+This module contains the class StockMiner. This class has eight functions. An object of this class is passed the stock
+name and file name. From the file, average monthly stock prices are calculated using the information in the file as
+follows: "Date", "Volume", and "Close". Incomplete entries will be passed over. Files without sufficient data will be
+thrown a ValueError. From this class, the six best and worst months, and standard deviation, can be returned.
+Additionally, the standard deviations of two stock may be compared to determine the greater standard deviation.
+
+Example:
+    $ python_StockMiner.py
+
+"""
 
 __author__ = 'Lauren Olar, Christopher Piche, and Magdalene Schifferer'
 __email__ = "lauren.olar@mail.utoronto.ca, christopher.piche@mail.utoronto.ca, magdalene.schifferer@mail.utoronto.ca"
