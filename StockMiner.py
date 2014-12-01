@@ -30,7 +30,7 @@ class StockMiner:
         self.calculate_monthly_average()
         self.sort_monthly_averages()
 
-        self.standard_deviation = []
+        self.standard_deviation = 0.0
         self.calculate_standard_deviation()
 
     def calculate_monthly_average(self):
