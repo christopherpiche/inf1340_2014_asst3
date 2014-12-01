@@ -56,7 +56,7 @@ def test_completeness():
 
 def test_standard_deviation():
 
-    standard_deviation = StockMiner("standard deviation", "standard_deviation.json")
+    standard_deviation = StockMiner("standard deviation", "data/standard_deviation.json")
 
     assert standard_deviation.get_standard_deviation() == 45.46
 
